@@ -1,0 +1,22 @@
+\NeedsTeXFormat{LaTeX2e}
+\ProvidesPackage{adfundem}[Ad fund 'em package]
+\RequirePackage{graphicx}
+\RequirePackage{hyperref}
+
+
+
+\newcounter{adverts}
+\setcounter{adverts}{1}
+
+% Insert an advert every section
+\NewCommandCopy{\oldstartsection}{\@startsection}
+\renewcommand{\@startsection}[1]{
+	\begin{figure}[]
+		\href{https://koenvh.nl/adfundem}{\includegraphics[width=1\linewidth]{ads/ad\theadverts.jpg}}
+	\end{figure}
+	\stepcounter{adverts}
+	\ifnum\theadverts=11
+		\setcounter{adverts}{1}
+	\fi
+	\oldstartsection{#1}
+}
