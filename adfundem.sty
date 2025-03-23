@@ -4,19 +4,27 @@
 \RequirePackage{hyperref}
 
 
+% Number of adverts in the "ads" folder, if you want to repeat them
+\def\adfundemnumber{100}
+% Key for tracking clicks on ads
+\def\adfundemkey{3e98e9de-9078-40b8-8074-a396f27c3e77}
+% Amount of sections per ad
+\def\adfundemsections{2}
 
-\newcounter{adverts}
-\setcounter{adverts}{1}
+\newcounter{adfundemcounter}
+\setcounter{adfundemcounter}{1}
+
 
 % Insert an advert every section
 \NewCommandCopy{\oldstartsection}{\@startsection}
 \renewcommand{\@startsection}[1]{
 	\begin{figure}[]
-		\href{https://koenvh.nl/adfundem}{\includegraphics[width=1\linewidth]{ads/ad\theadverts.jpg}}
+		\href{https://koenvh.nl/adfundem/\adfundemkey/\theadfundemcounter}{\includegraphics[width=1\linewidth]{ads/ad\theadfundemcounter.jpg}}
 	\end{figure}
-	\stepcounter{adverts}
-	\ifnum\theadverts=11
-		\setcounter{adverts}{1}
+	\ifnum\theadfundemcounter=\adfundemnumber
+		\setcounter{adfundemcounter}{1}
+	\else
+		\stepcounter{adfundemcounter}
 	\fi
 	\oldstartsection{#1}
 }
